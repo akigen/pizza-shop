@@ -10,6 +10,12 @@
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
 </head>
 <body>
-    <h2>Страница регистрации!</h2>
+    <h2>Страница регистрации</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ pizzashop_form.as_p }}
+        <button type="submit">Регистрация</button>
+    </form>
 </body>
 </html>
