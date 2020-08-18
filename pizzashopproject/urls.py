@@ -18,6 +18,9 @@ from django.urls import path
 from pizzashopapp import views
 from django.contrib.auth.views import LoginView, LogoutView
 
+from django.conf.urls.static import static
+from django.conf import settings
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
@@ -31,4 +34,4 @@ urlpatterns = [
 
     path('pizzashop/sign-up', views.pizzashop_sign_up, name='pizzashop-sign-up'),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
