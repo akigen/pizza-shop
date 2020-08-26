@@ -7,6 +7,10 @@ body {
   background-color: #7B2324;
 }
 
+.text-white {
+  color: white;
+}
+
 .btn-red {
   color: white;
   background-color: #E21E35;
@@ -98,4 +102,8 @@ body {
 /* SIDE BAR - CONTENT */
 .content {
   padding: 0 40px;
+}
+
+.content .panel {
+  border: none;
 }
