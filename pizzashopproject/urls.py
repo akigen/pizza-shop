@@ -35,6 +35,7 @@ urlpatterns = [
     path('pizzashop/sign-up', views.pizzashop_sign_up, name='pizzashop-sign-up'),
 
     path('pizzashop/account', views.pizzashop_account, name='pizzashop-account'),
-    path('pizzashop/pizza', views.pizzashop_pizza, name='pizzashop-pizza')
+    path('pizzashop/pizza', views.pizzashop_pizza, name='pizzashop-pizza'),
+    path('pizzashop/pizza/add', views.pizzashop_add_pizza, name='pizzashop-add-pizza')
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
