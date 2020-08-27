@@ -19,6 +19,25 @@ def pizzashop_home(request):
 
 
 @login_required(login_url='/pizzashop/sign-in/')
+def pizzashop_account(request):
+    user_form = UserFormForEdit(instance=request.user)
+    pizzashop_form = PizzaShopForm(instance=request.user.pizzashop)
+
+    if request.method == "POST":
+        user_form = UserFormForEdit(request.POST, instance=request.user)
+        pizzashop_form = PizzaShopForm(request.POST, request.FILES, instance=request.user.pizzashop)
+
+        if user_form.is_valid() and pizzashop_form.is_valid():
+            user_form.save()
+            pizzashop_form.save()
+
+    return render(request, 'pizzashop/account.html', {
+        'user_form': user_form,
+        'pizzashop_form': pizzashop_form
+    })
+
+
+@login_required(login_url='/pizzashop/sign-in/')
 def pizzashop_pizza(request):
     pizzas = Pizza.objects.filter(pizzashop=request.user.pizzashop).order_by("-id")
     return render(request, 'pizzashop/pizza.html', {
@@ -53,25 +72,6 @@ def pizzashop_edit_pizza(request, pizza_id):
 
     return render(request, 'pizzashop/edit_pizza.html', {
         'form': form
-    })
-
-
-@login_required(login_url='/pizzashop/sign-in/')
-def pizzashop_account(request):
-    user_form = UserFormForEdit(instance=request.user)
-    pizzashop_form = PizzaShopForm(instance=request.user.pizzashop)
-
-    if request.method == 'POST':
-        user_form = UserFormForEdit(request.POST, instance=request.user)
-        pizzashop_form = PizzaShopForm(request.POST, request.FILES, instance=request.user.pizzashop)
-
-        if user_form.is_valid() and pizzashop_form.is_valid():
-            user_form.save()
-            pizzashop_form.save()
-
-    return render(request, 'pizzashop/account.html', {
-        'user_form': user_form,
-        'pizzashop_form': pizzashop_form
     })
 
 
