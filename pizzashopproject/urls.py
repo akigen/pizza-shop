@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from pizzashopapp import views
+from pizzashopapp import views, apis
 from django.contrib.auth.views import LoginView, LogoutView
 
 from django.conf.urls.static import static
@@ -37,6 +37,7 @@ urlpatterns = [
     path('pizzashop/account', views.pizzashop_account, name='pizzashop-account'),
     path('pizzashop/pizza', views.pizzashop_pizza, name='pizzashop-pizza'),
     path('pizzashop/pizza/add', views.pizzashop_add_pizza, name='pizzashop-add-pizza'),
-    path('pizzashop/pizza/edit/<int:pizza_id>', views.pizzashop_edit_pizza, name='pizzashop-edit-pizza')
+    path('pizzashop/pizza/edit/<int:pizza_id>', views.pizzashop_edit_pizza, name='pizzashop-edit-pizza'),
+    path('api/client/pizzashops/', apis.client_get_pizzashops),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
