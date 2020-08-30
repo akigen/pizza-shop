@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from pizzashopapp.models import PizzaShop
+from pizzashopapp.models import PizzaShop, Pizza
 
 
 class PizzaShopSerializer(serializers.ModelSerializer):
@@ -13,3 +13,16 @@ class PizzaShopSerializer(serializers.ModelSerializer):
     class Meta:
         model = PizzaShop
         fields = ('id', 'name', 'phone', 'address', 'logo')
+
+
+class PizzaSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
+    def get_image(self, pizza):
+        request = self.context.get('request')
+        image_url = pizza.image.url
+        return request.build_absolute_uri(image_url)
+
+    class Meta:
+        model = Pizza
+        fields = ('name', 'short_description', 'image', 'price')
